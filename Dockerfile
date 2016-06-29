@@ -18,18 +18,18 @@ RUN rm -f /etc/nginx/conf.d/*
 
 # Install packages
 RUN apt-get update && apt-get install -my \
-  supervisor \
-  curl \
-  wget \
-  php5-curl \
-  php5-fpm \
-  php5-gd \
-  php5-memcached \
+#  supervisor \
+#  curl \
+#  wget \
+#  php5-curl \
+#  php5-fpm \
+#  php5-gd \
+#  php5-memcached \
   php5-mysql \
-  php5-mcrypt \
-  php5-sqlite \
-  php5-xdebug \
-  php-apc \
+#  php5-mcrypt \
+#  php5-sqlite \
+#  php5-xdebug \
+#  php-apc \
   mysql-client \
   mysql-server \
   pwgen
@@ -52,8 +52,6 @@ RUN sed -i '/.*xdebug.so$/s/^/;/' /etc/php5/mods-available/xdebug.ini
 
 RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
 
-ADD mysql-startdb.sh /mysql-startdb.sh
-
 # Install HHVM
 RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
 RUN echo deb http://dl.hhvm.com/debian jessie main | tee /etc/apt/sources.list.d/hhvm.list
@@ -74,10 +72,10 @@ VOLUME ["/var/www", "/etc/nginx/conf.d"]
 # Ports
 ################################################################################
 
-EXPOSE 80 9000 3306
+EXPOSE 80 9000 
 
 ################################################################################
 # Entrypoint
 ################################################################################
 
-ENTRYPOINT ["/usr/bin/supervisord","/startdb.sh"]
+ENTRYPOINT ["/usr/bin/supervisord"]
