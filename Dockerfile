@@ -18,21 +18,21 @@ RUN rm -f /etc/nginx/conf.d/*
 
 # Install packages
 RUN apt-get update && apt-get install -my \
-#  supervisor \
-#  curl \
-#  wget \
-#  php5-curl \
-#  php5-fpm \
-#  php5-gd \
-#  php5-memcached \
+  supervisor \
+  curl \
+  wget \
+  php5-curl \
+  php5-fpm \
+  php5-gd \
+  php5-memcached \
   php5-mysql \
-#  php5-mcrypt \
-#  php5-sqlite \
-#  php5-xdebug \
-#  php-apc \
-  mysql-client \
-  mysql-server \
-  pwgen
+  php5-mcrypt \
+  php5-sqlite \
+  php5-xdebug \
+  php-apc 
+#  mysql-client \
+#  mysql-server \
+#  pwgen
 
 # Ensure that PHP5 FPM is run as root.
 RUN sed -i "s/user = www-data/user = root/" /etc/php5/fpm/pool.d/www.conf
